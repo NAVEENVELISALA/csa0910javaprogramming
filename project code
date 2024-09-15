@@ -1,0 +1,163 @@
+import java.util.*;
+
+class WorkoutPlan {
+    private String planName;
+    private List<String> exercises;
+    private String clientName;
+
+    public WorkoutPlan(String planName, String clientName) {
+this.planName = planName;
+this.clientName = clientName;
+this.exercises = new ArrayList<>();
+    }
+
+    public void addExercise(String exercise) {
+exercises.add(exercise);
+    }
+
+    public String getPlanName() {
+        return planName;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public List<String>getExercises() {
+        return exercises;
+    }
+
+    public void displayPlan() {
+System.out.println("Workout Plan: " + planName);
+System.out.println("Client: " + clientName);
+System.out.println("Exercises:");
+        for (String exercise : exercises) {
+System.out.println("- " + exercise);
+        }
+    }
+}
+
+class Coach {
+    private String coachName;
+    private List<WorkoutPlan> plans;
+
+    public Coach(String coachName) {
+this.coachName = coachName;
+this.plans = new ArrayList<>();
+    }
+
+    public void createWorkoutPlan(String planName, String clientName) {
+WorkoutPlan plan = new WorkoutPlan(planName, clientName);
+plans.add(plan);
+    }
+
+    public void addExerciseToPlan(String planName, String exercise) {
+        for (WorkoutPlanplan : plans) {
+            if (plan.getPlanName().equals(planName)) {
+plan.addExercise(exercise);
+                return;
+            }
+        }
+System.out.println("Plan not found!");
+    }
+
+    public void displayAllPlans() {
+        for (WorkoutPlanplan : plans) {
+plan.displayPlan();
+        }
+    }
+}
+
+public class FitnessPlatformBackend {
+    public static void main(String[] args) {
+        Coach coach = new Coach("John Doe");
+
+coach.createWorkoutPlan("Beginner Plan", "Alice");
+coach.addExerciseToPlan("Beginner Plan", "Push-ups");
+coach.addExerciseToPlan("Beginner Plan", "Squats");
+
+coach.createWorkoutPlan("Advanced Plan", "Bob");
+coach.addExerciseToPlan("Advanced Plan", "Deadlift");
+coach.addExerciseToPlan("Advanced Plan", "Bench Press");
+
+coach.displayAllPlans();
+    }
+}
+Frontend (User Registration and Login using Java Apple):
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Map;
+
+public class FitnessLoginApplet extends JApplet implements ActionListener {
+    private JTextFieldusernameField;
+    private JPasswordFieldpasswordField;
+    private JLabelstatusLabel;
+
+    // In-memory user storage (for demo purposes)
+    private Map<String, String>userDatabase = new HashMap<>();
+
+    @Override
+    public void init() {
+        // UI Components
+JLabelusernameLabel = new JLabel("Username:");
+usernameField = new JTextField(15);
+
+JLabelpasswordLabel = new JLabel("Password:");
+passwordField = new JPasswordField(15);
+
+JButtonloginButton = new JButton("Login");
+JButtonregisterButton = new JButton("Register");
+
+statusLabel = new JLabel();
+
+        // Layout
+setLayout(new GridLayout(4, 2));
+        add(usernameLabel);
+        add(usernameField);
+        add(passwordLabel);
+        add(passwordField);
+        add(loginButton);
+        add(registerButton);
+        add(statusLabel);
+
+        // Event Listeners
+loginButton.addActionListener(this);
+registerButton.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+
+        if ("Login".equals(command)) {
+            if (authenticateUser(username, password)) {
+statusLabel.setText("Login successful!");
+            } else {
+statusLabel.setText("Invalid credentials.");
+            }
+        } else if ("Register".equals(command)) {
+            if (registerUser(username, password)) {
+statusLabel.setText("Registration successful!");
+            } else {
+statusLabel.setText("User already exists.");
+            }
+        }
+    }
+
+    private booleanauthenticateUser(String username, String password) {
+        return userDatabase.containsKey(username) &&userDatabase.get(username).equals(password);
+    }
+
+    private booleanregisterUser(String username, String password) {
+        if (userDatabase.containsKey(username)) {
+            return false;
+        }
+userDatabase.put(username, password);
+        return true;
+    }
+
+}
